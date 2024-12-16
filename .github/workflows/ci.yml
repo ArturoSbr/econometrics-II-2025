@@ -7,7 +7,7 @@ on:
       - main
   push:
     branches:
-      - "feature/assignment*"  # Triggers builds on assignment branches
+      - "feature/assignment*"
 
 jobs:
   build:
@@ -20,9 +20,8 @@ jobs:
         uses: r-lib/actions/setup-r@v2
       - name: Install Dependencies
         run: |
-          Rscript -e 'install.packages("remotes")'
-          Rscript -e 'remotes::install_version("lintr", version = "2.0.1", repos = "http://cran.us.r-project.org")'
-          Rscript -e 'remotes::install_version("styler", version = "1.6.1", repos = "http://cran.us.r-project.org")'
+          Rscript -e 'install.packages("lintr", repos = "http://cran.us.r-project.org")'
+          Rscript -e 'install.packages("styler", repos = "http://cran.us.r-project.org")'
       - name: Lint Code
         run: Rscript -e 'lintr::lint_package()'
       - name: Check Style
